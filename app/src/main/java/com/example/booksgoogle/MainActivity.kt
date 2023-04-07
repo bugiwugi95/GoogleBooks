@@ -9,6 +9,7 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.booksgoogle.ui.theme.BooksGoogleApp
 import com.example.booksgoogle.ui.theme.BooksGoogleTheme
 
 class MainActivity : ComponentActivity() {
@@ -21,7 +22,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-
+                    BooksGoogleApp()
                 }
             }
         }
@@ -29,11 +30,10 @@ class MainActivity : ComponentActivity() {
 }
 
 
-
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     BooksGoogleTheme {
-
+        BooksGoogleApp()
     }
 }
