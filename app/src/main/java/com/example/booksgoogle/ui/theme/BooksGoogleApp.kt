@@ -23,7 +23,7 @@ fun BooksGoogleApp(modifier: Modifier = Modifier) {
                 .padding(it),
             color = MaterialTheme.colors.background
         ) {
-            CardImage(booksData = BooksData(""))
+            CardImage(booksData = BooksData("",""))
         }
     }
 }
