@@ -1,10 +1,9 @@
-package com.example.booksgoogle.data
+package com.example.booksgoogle.repository
 
 import com.example.booksgoogle.network.ApiBooks
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 /**
  * Контейнер зависимостей для обьектов
@@ -16,10 +15,10 @@ interface AppContainer {
  * Реализация контейнера зависимостей
  */
 class DefaultAppContainer : AppContainer {
-    private val BASE_URL = "https://www.googleapis.com/books/v1/volumes?"
-
+    private val BASE_URL = "https://www.googleapis.com/books/v1/"
+//Copy string
     private val retrofit = Retrofit.Builder()
-        .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
+    .addConverterFactory(GsonConverterFactory.create())
         .baseUrl(BASE_URL)
         .build()
     /**
@@ -29,7 +28,6 @@ class DefaultAppContainer : AppContainer {
         retrofit.create(ApiBooks::class.java)
     }
         //DI
-    override val booksRepository: BooksRepository
-        get() = NetworkBooksRepository(retrofitService)
+    override val booksRepository: BooksRepository = NetworkBooksRepository(retrofitService)
 
 }

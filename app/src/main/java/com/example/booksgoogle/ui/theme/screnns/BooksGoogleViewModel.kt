@@ -10,8 +10,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.booksgoogle.BooksApplication
-import com.example.booksgoogle.data.BooksRepository
-import com.example.booksgoogle.model.BooksData
+import com.example.booksgoogle.data.Book
+import com.example.booksgoogle.repository.BooksRepository
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.EOFException
@@ -24,11 +24,11 @@ class BooksGoogleViewModel(private val booksRepository: BooksRepository) : ViewM
         getBooks()
     }
 
-    fun getBooks() {
+    fun getBooks(query: String = "book", maxResults: Int = 40) {
         viewModelScope.launch {
             booksUiState = BooksUiState.Loading
             booksUiState = try {
-                BooksUiState.Success(booksRepository.getBooks())
+                BooksUiState.Success(booksRepository.getBooks(query,maxResults))
             } catch (e: EOFException) {
                 BooksUiState.Error
             } catch (e: HttpException) {
@@ -54,7 +54,7 @@ class BooksGoogleViewModel(private val booksRepository: BooksRepository) : ViewM
 
 
 sealed interface BooksUiState {
-    data class Success(val booksData: MutableList<BooksData>) : BooksUiState
+    data class Success(val booksData: List<Book>) : BooksUiState
     object Loading : BooksUiState
     object Error : BooksUiState
 

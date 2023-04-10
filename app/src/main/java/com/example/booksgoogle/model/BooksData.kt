@@ -1,10 +1,12 @@
 package com.example.booksgoogle.model
 
-import kotlinx.serialization.SerialName
+import com.google.gson.annotations.SerializedName
 
-@kotlinx.serialization.Serializable
+
 data class BooksData(
-    val id: String,
-    @SerialName(value = "smallThumbnail")
-    val image: String
+
+    @SerializedName("kind") var kind: String? = null,
+    @SerializedName("totalItems") var totalItems: Int? = null,
+    @SerializedName("items") var items: ArrayList<Items> = arrayListOf()
+
 )

@@ -6,9 +6,10 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.booksgoogle.R
-import com.example.booksgoogle.model.BooksData
-import com.example.booksgoogle.ui.theme.screnns.CardImage
+import com.example.booksgoogle.ui.theme.screnns.BooksGoogleViewModel
+import com.example.booksgoogle.ui.theme.screnns.HomeScreen
 
 
 @Composable
@@ -23,7 +24,12 @@ fun BooksGoogleApp(modifier: Modifier = Modifier) {
                 .padding(it),
             color = MaterialTheme.colors.background
         ) {
-            CardImage(booksData = BooksData("",""))
+            val booksGoogleViewModel: BooksGoogleViewModel =
+                viewModel(factory = BooksGoogleViewModel.Factory)
+            HomeScreen(
+                booksUiState = booksGoogleViewModel.booksUiState,
+                retryAction = { booksGoogleViewModel.getBooks() }
+            )
         }
     }
 }

@@ -1,8 +1,8 @@
 package com.example.booksgoogle
 
 import android.app.Application
-import com.example.booksgoogle.data.AppContainer
-import com.example.booksgoogle.data.DefaultAppContainer
+import com.example.booksgoogle.repository.AppContainer
+import com.example.booksgoogle.repository.DefaultAppContainer
 
 /**
  * Экземпляр AppContainer, используемый остальными классами для получения зависимостей
